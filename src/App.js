@@ -1,12 +1,15 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 function App() {
   const [techs, setTech] = useState([]);
   const [newTech, setNewTech] = useState('');
 
-  function handleAdd() {
+  //useCallback - parecido com o useMemo só que retorna uma função
+  //só é recriada quando uma das variáveis sofrerem alterações
+  const handleAdd = useCallback(() => {
     setTech([...techs, newTech]);
-  }
+    setNewTech('');
+  }, [newTech, techs]);
 
   //useEffect - substitui os métodos de ciclo de vida
   useEffect(() => {
